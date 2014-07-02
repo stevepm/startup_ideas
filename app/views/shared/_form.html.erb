@@ -1,0 +1,17 @@
+<ul>
+  <% @user.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+</ul>
+
+<%= form_for @user, url: {action: "create"} do |f| %>
+  <%= f.label(:email) %>
+  <%= f.text_field(:email) %>
+  <%= f.label(:password) %>
+  <%= f.text_field(:password) %>
+  <% if login == false %>
+    <%= f.label(:password_confirmation) %>
+    <%= f.text_field(:password_confirmation) %>
+  <% end %>
+  <%= f.submit(submit_text) %>
+<% end %>

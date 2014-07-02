@@ -16,6 +16,7 @@ gem 'valid_email'
 group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'launchy'
 end
 
 gem 'bcrypt', '~> 3.1.7'

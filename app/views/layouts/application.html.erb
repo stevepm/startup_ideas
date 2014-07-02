@@ -11,10 +11,11 @@
   <ul>
     <li><%= link_to 'SUCollective', root_path %></li>
     <li><%= link_to 'About', '#' %></li>
-    <% if session[:user] %>
-      <li><%= link_to User.find(session[:user]).email, '#' %></li>
+    <% if logged_in? %>
+      <li><%= link_to 'Log out', login_path(current_user), method: :delete %></li>
+      <li><%= link_to current_user.email, '#' %></li>
     <% else %>
-      <li><%= link_to 'Log in', '#' %></li>
+      <li><%= link_to 'Log in', new_login_path %></li>
       <li><%= link_to 'Register', new_register_path %></li>
     <% end %>
   </ul>

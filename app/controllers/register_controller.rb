@@ -6,8 +6,8 @@ class RegisterController < ApplicationController
   def create
     @user = User.new(register_params)
     if @user.save
-      flash[:notice] = 'Successfully logged in'
-      session[:user] = @user.id
+      flash[:notice] = 'Successfully registered'
+      login(@user)
       redirect_to root_path
     else
       render :new
@@ -17,6 +17,6 @@ class RegisterController < ApplicationController
   private
 
   def register_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end

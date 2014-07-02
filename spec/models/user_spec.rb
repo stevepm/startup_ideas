@@ -9,6 +9,15 @@ describe User do
       expect(user.save).to eq(true)
     end
   end
+  describe 'logs in correctly' do
+    before do
+      User.create(email: email, password: password, password_confirmation: password)
+    end
+    it 'enters correct email and password' do
+      user = User.find_by_email(email).try(:authenticate, password)
+      expect(user).to eq(User.find_by_email(email))
+    end
+  end
 
   describe 'registers incorrectly' do
     it 'passwords dont match' do
@@ -26,6 +35,16 @@ describe User do
       expect(user.errors.full_messages).to eq(["Email is invalid"])
       user.email = email
       expect(user.save).to eq(true)
+    end
+  end
+
+  describe 'logs in incorrectly' do
+    before do
+      User.create(email: email, password: password, password_confirmation: password)
+    end
+    it 'enters incorrect email and password' do
+      user = User.find_by_email(email).try(:authenticate, 'incorrect')
+      expect(user).to eq(false)
     end
   end
 end
