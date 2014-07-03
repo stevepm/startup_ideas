@@ -1,0 +1,11 @@
+<ul>
+  <% @idea.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+</ul>
+
+<%= form_for @idea do |f| %>
+  <%= f.label 'Idea' %>
+  <%= f.text_field :title %>
+  <%= f.submit 'Submit' %>
+<% end %>

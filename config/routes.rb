@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :welcome, only: [:index]
   resources :register, only: [:new, :create]
   resources :login, only: [:new, :create, :destroy]
+  resources :ideas
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -9,5 +9,7 @@ describe ApplicationController do
     expect(session[:user]).to eq(user.id)
     expect(controller.logged_in?).to eq(true)
     expect(controller.current_user).to eq(user)
+    controller.logout
+    expect(session[:user]).to eq(nil)
   end
 end
