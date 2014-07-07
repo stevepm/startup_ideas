@@ -4,12 +4,15 @@ class LoginController < ApplicationController
   end
 
   def create
-    @user = User.find_by_email(params[:user][:email]).try(:authenticate, params[:user][:password])
-    if @user
+    user = User.find_by_email(params[:user][:email]).try(:authenticate, params[:user][:password])
+    if user
       flash[:notice] = 'Successfully logged in'
-      login(@user)
+      login(user)
       redirect_to root_path
     else
+      @error = 'Username/Password was incorrect'
+      @user = User.new
+      @email = params[:user][:email]
       render :new
     end
   end

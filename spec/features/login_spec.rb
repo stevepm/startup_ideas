@@ -15,4 +15,11 @@ feature 'Log in' do
     expect(page).to_not have_link(email)
     expect(page).to_not have_link('Log out')
   end
+
+  scenario 'User enters wrong password' do
+    visit '/'
+    click_link 'Log in'
+    click_button 'Log in'
+    expect(page).to have_content('Username/Password was incorrect')
+  end
 end

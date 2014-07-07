@@ -6,7 +6,7 @@ feature 'Startup ideas' do
       register
       click_on 'Add a new idea'
       click_on 'Submit'
-      expect(page).to have_content("Title can't be blank")
+      expect(page).to have_content("can't be blank")
       fill_in 'idea[title]', with: 'testing'
       click_button 'Submit'
       expect(current_url).to eq('http://www.example.com/')

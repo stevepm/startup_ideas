@@ -1,17 +1,22 @@
-<ul>
-  <% @user.errors.full_messages.each do |error| %>
-    <li><%= error %></li>
-  <% end %>
-</ul>
-
-<%= form_for @user, url: {action: "create"} do |f| %>
-  <%= f.label(:email) %>
-  <%= f.text_field(:email) %>
-  <%= f.label(:password) %>
-  <%= f.text_field(:password) %>
-  <% if login == false %>
-    <%= f.label(:password_confirmation) %>
-    <%= f.text_field(:password_confirmation) %>
-  <% end %>
-  <%= f.submit(submit_text) %>
+<% if @error %>
+  <div class="alert alert-danger">
+    <%= @error %>
+  </div>
 <% end %>
+
+<div class="col-sm-9 col-sm-offset-3">
+  <%= bootstrap_form_for @user, url: {action: "create"}, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4" do |f| %>
+    <% if @email %>
+      <%= f.text_field :email, value: @email %>
+    <% else %>
+      <%= f.text_field(:email) %>
+    <% end %>
+    <%= f.password_field(:password) %>
+    <% if !login %>
+      <%= f.password_field(:password_confirmation) %>
+    <% end %>
+    <%= f.form_group do %>
+      <%= f.submit(submit_text) %>
+    <% end %>
+  <% end %>
+</div>

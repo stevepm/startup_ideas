@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  before_action :require_login
+  before_action :require_login, only: [:new, :create]
   before_action :get_idea, only: [:show]
 
   def new
@@ -28,7 +28,7 @@ class IdeasController < ApplicationController
 
   def require_login
     unless logged_in?
-      flash[:error] = "You must log in to add an idea"
+      flash[:error] = 'You must log in to add an idea'
       redirect_to root_path
     end
   end
